@@ -1,7 +1,7 @@
 import h5py
 
 
-with h5py.File('./h5py/my_h5_file.h5','r') as fr:
+with h5py.File('./h5py/pose.h5','r') as fr:
     keys = list(fr.keys())
 
     for key in keys:
