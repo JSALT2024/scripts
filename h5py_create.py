@@ -25,7 +25,7 @@ if __name__ == '__main__':
     f_out = h5py.File(os.path.join(output_path, output_file), 'w')
 
     # special data type for numpy array with variable length
-    dt = h5py.vlen_dtype(np.dtype('float64'))
+    dt = h5py.vlen_dtype(np.dtype('float16'))
 
     for i in range(0, len(video_ids)):      # iterating over videos
         video = video_ids[i]
