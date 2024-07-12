@@ -89,7 +89,6 @@ if __name__ == '__main__':
     with open(os.path.join(output_path, 'annotation.json'), 'w') as f:
         json.dump(json_dict, f)
 
-
     with open(os.path.join(output_path, 'metadata_mae.json'), 'w') as f:
         json.dump(metadata_mae, f)
 
