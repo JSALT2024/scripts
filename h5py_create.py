@@ -25,7 +25,7 @@ if __name__ == '__main__':
     f_out = h5py.File(os.path.join(output_path, output_file), 'w')
 
     # special data type for numpy array with variable length
-    dt = h5py.vlen_dtype(np.dtype('float16'))
+    # dt = h5py.vlen_dtype(np.dtype('float16'))
 
     for i in range(0, len(video_ids)):      # iterating over videos
         video = video_ids[i]
@@ -43,7 +43,7 @@ if __name__ == '__main__':
             # AND CONCATE THEM TO features
             # OR DO CYCLE OVER THE FRAMES AND SAVE features TO H5 BATCH BY BATCH
             features = list_of_features[i][idx]
-            fetures_list_h5 = video_h5.create_dataset(clip, shape=(len(features),), maxshape=(None,), dtype=dt)
+            fetures_list_h5 = video_h5.create_dataset(clip, shape=(len(features),), maxshape=(None,), dtype=np.float16)
             num_full_chunks = len(features) // chunk_size
             last_chunk_size = len(features) % chunk_size
             for c in range(num_full_chunks):
