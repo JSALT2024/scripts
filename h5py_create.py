@@ -21,7 +21,7 @@ if __name__ == '__main__':
     output_path = "./h5py"
     output_file = 'my_h5_file.h5'
 
-    # h5py file initialization4,
+    # h5py file initialization
     f_out = h5py.File(os.path.join(output_path, output_file), 'w')
 
     # special data type for numpy array with variable length
