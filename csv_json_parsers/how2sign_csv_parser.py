@@ -8,7 +8,7 @@ def parse(csv_dir):
             csv_reader = csv.DictReader(file, delimiter='\t')
             for row in csv_reader:
                 video_id = row['VIDEO_ID']
-                clip_id = row['SENTENCE_ID'].split('_')[-1]
+                clip_id = row['SENTENCE_ID']
                 caption = row['SENTENCE']
 
                 if video_id not in data:
