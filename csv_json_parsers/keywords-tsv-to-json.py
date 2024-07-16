@@ -27,7 +27,7 @@ def parse_line_yt(line):
 def parse_line_h2s(line):
     # expects tab-separated columns with the following header:
     #    VIDEO_ID        VIDEO_NAME      SENTENCE_ID     SENTENCE_NAME   START_REALIGNED END_REALIGNED   SENTENCE        STATE   KEYWORDS  
-    vid, _, clip_name, _, _, _, transl, is_ok, keywords = line.split("\t")
+    vid, _, _, clip_name, _, _, transl, is_ok, keywords = line.split("\t")
     return vid, clip_name, transl, parse_keywords(is_ok, keywords)
 
 if len(sys.argv) < 2:
