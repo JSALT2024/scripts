@@ -6,6 +6,7 @@ import pandas as pd
 
 def parse_keywords(is_ok, keywords):
     if is_ok == "OK":
+        keywords = keywords[1:-1]
         keywords = keywords.split(", ")
     else:
         keywords = []
@@ -45,7 +46,7 @@ if __name__ == '__main__':
 
     df_tsv = pd.read_csv(args.input_tsv, sep="\t", header=None)
     df_csv = pd.read_csv(args.input_csv, sep="\t")
-    for (index, tsv_line),(index2, csv_line) in zip(df_tsv.iterrows(), df_csv.iterrows()):
+    for (index, tsv_line), (index2, csv_line) in zip(df_tsv.iterrows(), df_csv.iterrows()):
 
         vid, clip_name, transl, keywords = parse_line(tsv_line)
 
