@@ -15,7 +15,7 @@ def parse_keywords(is_ok, keywords):
 
 
 def parse_line_yt(line):
-    beg_t, end_t, vid, begframe, endframe, fps, transl, is_ok, keywords = line
+    clipid, beg_t, end_t, vid, begframe, endframe, fps, transl, is_ok, keywords = line
     begframe = int(begframe)
     endframe = int(endframe)
     clip_name = "%06d-%06d" % (begframe, endframe)
@@ -46,11 +46,21 @@ if __name__ == '__main__':
     data = {}  # creating data from scratch. If only adding paraphrases, first load this dict from file...
 
     df_tsv = pd.read_csv(args.input_tsv, sep="\t", header=None, quotechar='\x07')
+    columns = ['Beg(s)', 'Dur(s)', 'YouTubeID', 'StartFrame', 'EndFrame', 'FPS', 'Caption', 'isOK', 'Keywords']
+    df_tsv.columns = columns
+    df_tsv[['Beg(s)', 'Dur(s)']] = df_tsv[['Beg(s)', 'Dur(s)']].map(lambda x: float(f"{x:.2f}"))
+    df_tsv['ClipID'] = df_tsv.apply(lambda row: f"{row['YouTubeID']}.{row['StartFrame']:06d}-{row['EndFrame']:06d}", axis=1)
+    df_tsv = df_tsv[['ClipID'] + [col for col in df_tsv.columns if col != 'ClipID']]
+    df_tsv = df_tsv.sort_values(by=['ClipID'])
+    df_tsv = df_tsv.reset_index(drop=True)
+
     df_csv = pd.read_csv(args.input_csv, sep=",")
-    for index, tsv_line in tqdm(df_tsv.iterrows()):
-        clip_id = f"{tsv_line[2]}.{tsv_line[3]:06d}-{tsv_line[4]:06d}"
+    df_csv = df_csv.sort_values(by=['ClipID'])
+    df_csv = df_csv.reset_index(drop=True)
+
+    for (index, tsv_line), (index2, csv_line) in tqdm(zip(df_tsv.iterrows(), df_csv.iterrows())):
+        clip_id = tsv_line["ClipID"]
         vid, clip_name, transl, keywords = parse_line(tsv_line)
-        csv_line = df_csv[(df_csv['ClipID'] == clip_id)].iloc[0]
         if vid not in data:
             data[vid] = {
                 "clip_order": []  # skip this in adding paraphrases

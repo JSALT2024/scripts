@@ -8,8 +8,8 @@ data_modality = 'pose'
 with open(f'{data_dir}/bla.json', 'r') as f:
     annotations = json.load(f)
 
-with open(f'{data_dir}/pose/h2s.keypoints.test.json', 'r') as f:
-    metadata = json.load(f)
+# with open(f'{data_dir}/pose/h2s.keypoints.test.json', 'r') as f:
+#     metadata = json.load(f)
 
 video_names = list(annotations.keys())
 
@@ -19,10 +19,10 @@ total_number_of_missing_clips = 0
 new_annotations = {}
 
 for video_name in video_names:
-    correct_h5_file = metadata[video_name]
+    # correct_h5_file = metadata[video_name]
     clip_order = annotations[video_name]['clip_order']
 
-    h5py_file = h5py.File(f'{data_dir}/{data_modality}/{data_modality}.test.{correct_h5_file}.h5', 'r')
+    h5py_file = h5py.File(f'{data_dir}/{data_modality}/YouTubeASL.keypoints.train.0.h5', 'r')
     for clip in clip_order:
         try:
             features = h5py_file[video_name][clip]
@@ -42,5 +42,5 @@ for video_name in video_names:
 print(f'Total number of founded clips: {total_number_of_founded_clips}')
 print(f'Total number of missing clips: {total_number_of_missing_clips}')
 
-with open(f'{data_dir}/annotations.test.json', 'w') as f:
+with open(f'{data_dir}/yt.annotations.train.json', 'w') as f:
     json.dump(new_annotations, f, indent=4)
