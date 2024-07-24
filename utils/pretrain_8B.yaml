@@ -1,0 +1,83 @@
+ModelArguments:
+  model_name_or_path: /scratch/project_465000977/SignLLMpp/models/meta-llama/Meta-Llama-3-8B-Instruct #meta-llama/Meta-Llama-3-70B-Instruct #
+  version: llava_sign_llama_3
+  tune_mm_mlp_adapter: True 
+TrainingArguments:
+  output_dir: signllava/checkpoints/llama3_8b_pre_50ep_mae_dino_sign2vec_par_lsmoothing02
+  run_name: llama3_8b_pre_50ep_mae_dino_sign2vec_par_lsmoothing02
+  model_max_length: 2048
+  bf16: True
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 8
+  #auto_find_batch_size: True
+  resume_from_checkpoint: False
+  do_train: True
+  do_eval: True
+  evaluation_strategy: steps
+  save_strategy: steps
+  eval_steps: 50
+  save_steps: 50
+  logging_steps: 50
+  metric_for_best_model: eval_loss
+  load_best_model_at_end: True
+  save_total_limit: 5
+  weight_decay: 0.1
+  warmup_ratio: 0.03
+  dataloader_num_workers: 7
+  num_train_epochs: 50
+  learning_rate: 0.0002
+  label_smoothing_factor: 0.2
+  lr_scheduler_type: cosine
+  gradient_checkpointing: True
+  double_quant: True # Compress the quantization statistics through double quantization.
+  quant_type: nf4
+  bits: 16 # 4, 8 to enable quantization
+  lora_enable: False
+  lora_r: 64
+  lora_alpha: 16
+  lora_dropout: 0.05
+  lora_weight_path: ""
+  lora_bias: "none"
+  group_by_modality_length: False
+  seed: 42
+  data_seed: 42
+SignDataArguments:
+  use_paraphrases: True
+  context_window_size: 0 #number of preceding sentences
+  prelude_window_size: 0 #number of sentences at the beginning of the discourse 
+  data_dir: /scratch/project_465000977/data/How2Sign/
+  annotation_path:
+    train: features/H2S.annotations.train.json
+    dev: features/H2S.annotations.dev.json
+  visual_features:
+    sign2vec:
+      enable_input: True
+      train: features/sign2vec/new/metadata_sign2vec.train.json
+      dev: features/sign2vec/new/metadata_sign2vec.dev.json
+    mae:
+      enable_input: True
+      train: features/mae/16-07_21-52-12/H2S.mae.train.json
+      dev: features/mae/16-07_21-52-12/H2S.mae.dev.json
+    dino:
+      enable_input: True
+      train: features/dino/H2S.dino.train.json
+      dev: features/dino/H2S.dino.dev.json
+    pose:
+      enable_input: False
+      train: features/keypoints/H2S.keypoints.train.json
+      dev: features/keypoints/H2S.keypoints.dev.json
+SignModelArguments:
+  projectors:
+    sign2vec: 
+      dim: 768
+      projector_type: mlp2x_gelu
+    mae: 
+      dim: 768
+      projector_type: mlp2x_gelu
+    dino: 
+      dim: 1152
+      projector_type: mlp2x_gelu
+    pose: 
+      dim: 208
+      projector_type: mlp2x_gelu
+
