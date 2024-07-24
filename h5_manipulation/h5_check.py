@@ -1,6 +1,5 @@
 import h5py
 
-
 with h5py.File('./h5py/pose_0.h5','r') as fr:
     keys = list(fr.keys())
 

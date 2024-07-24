@@ -18,7 +18,7 @@ if __name__ == '__main__':
     list_of_features = [[[np.array([1, 2, 3]), np.array([4, 5, 6])], [np.array([7, 8]), np.array([9]), np.array([10])]],
                         [[np.array([11, 12, 13])]]  # list of lists of numpy arrays (one list for each clip)
                         ]
-    output_path = "./h5py"
+    output_path = "../h5py"
     output_file = 'my_h5_file.h5'
 
     # h5py file initialization

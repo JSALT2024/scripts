@@ -1,7 +1,7 @@
 import json
 import h5py
 
-data_dir = './data'
+data_dir = '../data'
 
 data_modality = 'pose'
 
