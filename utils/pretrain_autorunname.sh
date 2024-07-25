@@ -28,8 +28,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/
 # export HF_HUB_CACHE=/pfs/lustrep2/scratch/project_465000977/gruberiv/models/
 # export HF_HOME=~/.cache/huggingface
 # meta-llama/Meta-Llama-3-8B-Instruct #meta-llama/Meta-Llama-3-70B-Instruct #
-MODEL_VERSION=Meta-Llama-3-8B
-RUN_NAME="llava-$MODEL_VERSION-pretrain_pose_mae_$SLURM_JOB_ID"
+RUN_NAME=$(python3 /scripts/config2run.py configs/linear_long.yaml)
 export WANDB_API_KEY="c80b9867673b9200b1768293b0b435c170146042"
 export WANDB_ENTITY="jsalt2024-slt"
 export WANDB_PROJECT="H2S"

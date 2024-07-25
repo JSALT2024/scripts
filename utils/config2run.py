@@ -1,4 +1,5 @@
 import yaml
+import sys
 
 def generate_run_name(file_path):
     with open(file_path, 'r') as file:
@@ -28,7 +29,11 @@ def generate_run_name(file_path):
     
     return run_name
 
-file_path = 'pretrain_8B.yaml'
-
-run_name = generate_run_name(file_path)
-print(f"Generated run name: {run_name}")
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: config2run.py <config_file_path>")
+        sys.exit(1)
+    
+    file_path = sys.argv[1]
+    run_name = generate_run_name(file_path)
+    print(run_name)
