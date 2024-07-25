@@ -15,6 +15,7 @@ module load PyTorch/2.2.0-rocm-5.6.1-python-3.10-singularity-20240315
 SIF=/pfs/lustrep2/scratch/project_465000977/SIFs/lumi-pytorch-rocm-5.6.1-python-3.10-pytorch-v2.2.0-JSALT_17.sif
 JOB_DIR=""
 DATA_DIR=""
+CONFIG_NAME=configs/linear_long.yaml
 # MIOpen Error: /MIOpen/src/sqlite_db.cpp:220: Internal error while accessing SQLite database: locking protocol
 # Fix ->
 # Workaround MIOpen DB issue when using multiple processes
@@ -28,7 +29,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/
 # export HF_HUB_CACHE=/pfs/lustrep2/scratch/project_465000977/gruberiv/models/
 # export HF_HOME=~/.cache/huggingface
 # meta-llama/Meta-Llama-3-8B-Instruct #meta-llama/Meta-Llama-3-70B-Instruct #
-RUN_NAME=$(python3 /scripts/config2run.py configs/linear_long.yaml)
+RUN_NAME=$(python3 /scripts/config2run.py ${CONFIG_NAME})
 export WANDB_API_KEY="c80b9867673b9200b1768293b0b435c170146042"
 export WANDB_ENTITY="jsalt2024-slt"
 export WANDB_PROJECT="H2S"
@@ -44,5 +45,5 @@ srun singularity exec $SIF bash -c "\$WITH_CONDA; torchrun \
     --gradient_accumulation_steps 1 \
     --report_to wandb \
 	--run_name ${RUN_NAME} \
-    --yaml_args configs/linear_long.yaml \
+    --yaml_args ${CONFIG_NAME} \
     "
