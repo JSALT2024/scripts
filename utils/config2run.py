@@ -1,6 +1,9 @@
 import yaml
 
-def generate_run_name(config):
+def generate_run_name(file_path):
+    with open(file_path, 'r') as file:
+        config = yaml.safe_load(file)
+    
     model_params = config['ModelArguments']['model_name_or_path'].split('/')[-1]
     if '8B' in model_params:
         model_size = '8b'
@@ -27,8 +30,5 @@ def generate_run_name(config):
 
 file_path = 'pretrain_8B.yaml'
 
-with open(file_path, 'r') as file:
-    config = yaml.safe_load(file)
-
-run_name = generate_run_name(config)
+run_name = generate_run_name(file_path)
 print(f"Generated run name: {run_name}")
