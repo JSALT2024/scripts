@@ -20,8 +20,11 @@ def parse_json(file_path):
         candidates = []
         for video_name, clips in data.items():
             for clip_id, translations in clips.items():
-                references.append(translations['ref'])
-                candidates.append(translations['output'])
+                # skip the 'clip_order' key
+                if clip_id == 'clip_order':
+                    continue
+                references.append(translations['translation'])
+                candidates.append(translations['hypothesis'])
         return references, candidates
     except Exception as e:
         print(f"Error parsing JSON file {file_path}: {e}")
