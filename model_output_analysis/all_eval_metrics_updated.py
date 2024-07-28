@@ -11,6 +11,7 @@ from bleurt import score
 DEFAULT_CHECKPOINT_PATH = os.path.expanduser("~/BLEURT-20")
 DEFAULT_OUTPUT_FILE = "evaluation_scores.txt"
 
+
 def parse_json(file_path):
     try:
         with open(file_path, 'r') as f:
@@ -25,6 +26,7 @@ def parse_json(file_path):
     except Exception as e:
         print(f"Error parsing JSON file {file_path}: {e}")
         return None, None
+
 
 def parse_json_files(path):
     try:
@@ -46,6 +48,7 @@ def parse_json_files(path):
         print(f"Error parsing JSON files: {e}")
         return None, None
 
+
 def evaluate_with_bleurt(references, candidates, checkpoint):
     try:
         if not tf.io.gfile.exists(checkpoint):
@@ -57,6 +60,7 @@ def evaluate_with_bleurt(references, candidates, checkpoint):
         print(f"Error evaluating with BLEURT: {e}")
         return None
 
+
 def evaluate_with_bleu(references, candidates):
     try:
         bleu = evaluate.load("bleu")
@@ -66,6 +70,7 @@ def evaluate_with_bleu(references, candidates):
         print(f"Error evaluating with BLEU: {e}")
         return None
 
+
 def evaluate_with_chrf(references, candidates):
     try:
         chrf = evaluate.load("chrf")
@@ -74,6 +79,7 @@ def evaluate_with_chrf(references, candidates):
     except Exception as e:
         print(f"Error evaluating with ChrF: {e}")
         return None
+
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate translations using BLEURT, BLEU, and ChrF")
@@ -157,6 +163,7 @@ def main():
         print("Traceback:")
         import traceback
         traceback.print_exc()
+
 
 if __name__ == "__main__":
     main()
