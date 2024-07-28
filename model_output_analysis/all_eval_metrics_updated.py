@@ -86,6 +86,14 @@ def main():
     args = parser.parse_args()
 
     try:
+        # Check if BLEURT checkpoint exists
+        if not os.path.exists(args.checkpoint):
+            print(f"BLEURT checkpoint not found at {args.checkpoint}")
+            print("Attempting to download BLEURT-20 checkpoint...")
+            os.system(f"wget https://storage.googleapis.com/bleurt-oss-21/BLEURT-20.zip -P {os.path.dirname(args.checkpoint)}")
+            os.system(f"unzip {os.path.dirname(args.checkpoint)}/BLEURT-20.zip -d {os.path.dirname(args.checkpoint)}")
+            print("BLEURT-20 checkpoint downloaded and extracted.")
+
         # Parse JSON file(s)
         print("Parsing JSON files...")
         references, candidates = parse_json_files(args.json_path)
