@@ -1,0 +1,14 @@
+all_eval_corpus.py: This should report both BLEURT at sentence-level. This contains a catch for BLEURT, if you don't
+have the checkpoint for it, it will download it for you. But if for some reason, this still cause issues, you can 
+check the page directly: https://github.com/google-research/bleurt
+
+comprehensive_script.py: This should report all metrics along with the actual text. So the reference and candidate 
+sentences along with BLEURT (sentence-level, scale of 0 to 1), BLEU (corpus-level and reported in the classic 
+manner here, a scale of 0 to 1), and ChrF (corpus-level, scale of 0 to 100).
+
+Word_is_present.py: Metrics: accuracy, precision, recall, and F1 score. Can be used for both single word presence
+or multiple word presence. 
+
+reverse_order_eval: accuracy, precision, recall, and F1 score.
+
+All code is heavily commented and has a lot of error checks. 
