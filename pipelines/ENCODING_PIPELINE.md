@@ -22,8 +22,8 @@ graph LR;
     end
     
     Pre-processing-->PoseEstimation
-    PoseEstimation-->MAE
-    PoseEstimation-->DINOv2
+    A-->MAE
+    A-->DINOv2
     A-->B
     
     DINOv2-->Sign_LLaVA
