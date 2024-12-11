@@ -51,7 +51,7 @@ python pose_prediction_parallel.py \
     --yolo_sign_space 4
 ```
 
-### pose_prediction_parallel.py
+### create_keypoint_features.py
 ```bash
 python create_keypoint_features.py \
   --input_folder data/cropped_clips \
@@ -89,3 +89,9 @@ python mae/create_mae_features.py \
   --dataset_name yt \
   --split_name train
 ```
+
+## Important
+> If the clip names are not in the format: video_name.time_stamp.mp4 (yMJpqfrcRFo.027782-027925.mp4), 
+> annotation file with: SENTENCE_NAME and VIDEO_ID columns should be provided in all feature creation scripts as 
+> input argument --annotation_file. 
+> SENTENCE_NAME is name of the clip and VIDEO_ID is name of the video.
