@@ -1,12 +1,9 @@
-
-
-
 ```mermaid
 graph LR;   
     subgraph Pre-processing
-        E[trim videos]
+        E[script_trim.py]
         F[rename clips]
-        G[Text removing with OCR and inpaint]
+        G[Text removal with OCR and inpaint]
     end
     
     subgraph PoseEstimation
@@ -33,8 +30,29 @@ graph LR;
 
     style Sign_LLaVA opacity:0.5;
 ```
-
-
+## [Pre-processing - video trimming](https://github.com/JSALT2024/VideoPreprocessing)
+### csv_prep.py
+```bash
+python script_ocr.py \
+	--filenames filelist.txt \
+	--logfile outpus_log.csv \
+	--input clips \
+	--output clips-ocr
+```
+## [Pre-processing - text removal](https://github.com/JSALT2024/VideoPreprocessing)
+### csv_prep.py
+```bash
+python script_trim.py \
+    --input_tsv metadata.tsv \
+    --output_csv filelist.csv
+```
+### script_trim.py
+```bash
+python script_trim.py \
+	--inputdir videos \
+	--csv_dir filelist.csv \
+	--output clips
+```
 ## [PoseEstimation](https://github.com/JSALT2024/PoseEstimation)
 ### pose_prediction_parallel.py
 ```bash
