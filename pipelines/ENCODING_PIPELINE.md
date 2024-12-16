@@ -6,6 +6,7 @@ graph LR;
     subgraph Pre-processing
         E[trim videos]
         F[rename clips]
+        G[OCR text and inpaint text in clips]
     end
     
     subgraph PoseEstimation
