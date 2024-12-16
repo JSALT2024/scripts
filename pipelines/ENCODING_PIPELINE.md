@@ -31,7 +31,7 @@ graph LR;
     style Sign_LLaVA opacity:0.5;
 ```
 ## [Pre-processing - video trimming](https://github.com/JSALT2024/VideoPreprocessing)
-### csv_prep.py
+### script_ocr.py
 ```bash
 python script_ocr.py \
 	--filenames filelist.txt \
