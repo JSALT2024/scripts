@@ -2,8 +2,7 @@
 graph LR;   
     subgraph Pre-processing
         E[script_trim.py]
-        F[rename clips]
-        G[Text removal with OCR and inpaint]
+        G[ocr_script.py]
     end
     
     subgraph PoseEstimation
@@ -31,27 +30,28 @@ graph LR;
     style Sign_LLaVA opacity:0.5;
 ```
 ## [Pre-processing - video trimming](https://github.com/JSALT2024/VideoPreprocessing)
-### script_ocr.py
+### csv_prep.py
 ```bash
-```bash
-python script_trim.py \
+python csv_prep.py \
     --input_tsv metadata.tsv \
     --output_csv filelist.csv
 ```
 ### script_trim.py
 ```bash
 python script_trim.py \
-	--inputdir videos \
-	--csv_dir filelist.csv \
-	--output clips
+    --inputdir videos \
+    --csv_dir filelist.csv \
+    --output clips \
+    --ffmpeg ffmpeg
 ```
 ## [Pre-processing - text removal](https://github.com/JSALT2024/VideoPreprocessing)
-### csv_prep.py
+### script_ocr.py
+```bash
 python script_ocr.py \
-	--filenames filelist.txt \
-	--logfile outpus_log.csv \
-	--input clips \
-	--output clips-ocr
+    --filenames filelist.txt \
+    --logfile outpus_log.csv \
+    --input clips \
+    --output clips-ocr
 ```
 ## [PoseEstimation](https://github.com/JSALT2024/PoseEstimation)
 ### pose_prediction_parallel.py
