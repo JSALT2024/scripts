@@ -6,7 +6,7 @@ graph LR;
     subgraph Pre-processing
         E[trim videos]
         F[rename clips]
-        G[OCR text and inpaint text in clips]
+        G[Text removing (OCR, inpaint]
     end
     
     subgraph PoseEstimation
@@ -30,9 +30,7 @@ graph LR;
     DINOv2-->Sign_LLaVA
     MAE-->Sign_LLaVA
     B-->Sign_LLaVA
-    
-    style E opacity:0.5;
-    style F opacity:0.5;
+
     style Sign_LLaVA opacity:0.5;
 ```
 
