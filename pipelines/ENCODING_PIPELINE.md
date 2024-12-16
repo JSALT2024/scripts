@@ -33,14 +33,6 @@ graph LR;
 ## [Pre-processing - video trimming](https://github.com/JSALT2024/VideoPreprocessing)
 ### script_ocr.py
 ```bash
-python script_ocr.py \
-	--filenames filelist.txt \
-	--logfile outpus_log.csv \
-	--input clips \
-	--output clips-ocr
-```
-## [Pre-processing - text removal](https://github.com/JSALT2024/VideoPreprocessing)
-### csv_prep.py
 ```bash
 python script_trim.py \
     --input_tsv metadata.tsv \
@@ -52,6 +44,14 @@ python script_trim.py \
 	--inputdir videos \
 	--csv_dir filelist.csv \
 	--output clips
+```
+## [Pre-processing - text removal](https://github.com/JSALT2024/VideoPreprocessing)
+### csv_prep.py
+python script_ocr.py \
+	--filenames filelist.txt \
+	--logfile outpus_log.csv \
+	--input clips \
+	--output clips-ocr
 ```
 ## [PoseEstimation](https://github.com/JSALT2024/PoseEstimation)
 ### pose_prediction_parallel.py
