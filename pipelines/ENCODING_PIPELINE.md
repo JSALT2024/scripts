@@ -6,7 +6,7 @@ graph LR;
     subgraph Pre-processing
         E[trim videos]
         F[rename clips]
-        G[Text removing (OCR, inpaint]
+        G[Text removing with OCR and inpaint]
     end
     
     subgraph PoseEstimation
